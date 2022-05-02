@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { VILLAGERS_URL } from "./constants/index";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [data, setData] = useState([]);
+
+  const fetchVillagers = () => {
+    axios
+      .get(`${VILLAGERS_URL}`)
+      .then((res) => {
+        console.log("data:", res.data);
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const createVillagers = () => {
+    const villagers = [];
+
+    for (let i = 0; i < data.length; i++) {
+      villagers.push(<div key={i}>{data[i].name["name-USen"]}</div>);
+      // console.log("villagers name:", data[i].name["name-USen"]);
+    }
+    // console.log("villagers:", villagers);
+    return villagers;
+  };
+
+  useEffect(() => {
+    fetchVillagers();
+  }, []);
+
+  return <div className="App">{createVillagers()}</div>;
 }
 
 export default App;
