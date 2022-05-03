@@ -3,38 +3,19 @@ import axios from "axios";
 import { VILLAGERS_URL } from "./constants/index";
 import "./App.css";
 
+import { AnimalList } from "./components/AnimalList";
+import { Nav } from "./components/Nav.js";
+
 function App() {
-  // this contains ALL of villagers information
   const [data, setData] = useState([]);
 
   const fetchVillagers = () => {
     axios
       .get(`${VILLAGERS_URL}`)
       .then((res) => {
-        // console.log("data:", res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  };
-
-  const createVillagers = () => {
-    const allVillagers = [];
-    for (let i = 0; i < data.length; i++) {
-      allVillagers.push(
-        <div key={i}>
-          <img src={data[i].icon_uri} alt={data[i].name} />
-          <h2>
-            Animal Name: {data[i].name["name-USen"]} ({data[i].gender})
-          </h2>
-          <h3>Birthday: {data[i]["birthday-string"]}</h3>
-          <h3>Hobby: {data[i].hobby}</h3>
-          <h3>Personality: {data[i].personality}</h3>
-          <h3>Catchphrase: {data[i]["catch-phrase"]}</h3>
-          <h3>Saying: {data[i].saying}</h3>
-        </div>
-      );
-    }
-    return allVillagers;
   };
 
   useEffect(() => {
@@ -43,7 +24,24 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Animals">{createVillagers()}</div>
+      <Nav className="Nav" />
+      <div className="AnimalContainer">
+        {data.map((animal) => (
+          <AnimalList
+            // className="Animal"
+            key={animal.id}
+            photo={animal.icon_uri}
+            id={animal.id}
+            name={animal.name["name-USen"]}
+            gender={animal.gender}
+            birthday={animal["birthday-string"]}
+            hobby={animal.hobby}
+            personality={animal.personality}
+            catchphrase={animal["catch-phrase"]}
+            saying={animal.saying}
+          />
+        ))}
+      </div>
     </div>
   );
 }
