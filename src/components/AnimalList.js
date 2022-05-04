@@ -1,12 +1,13 @@
 import React from "react";
-import "../styles/AnimalList.css";
+import "../App.css";
 import { AnimalPhoto } from "./AnimalPhoto";
-import { AnimalCards } from "./AnimalCard";
+import { AnimalCards } from "./AnimalCards";
 
 export function AnimalList(props) {
   let {
+    bubbleColor,
+    color,
     photo,
-    id,
     name,
     gender,
     birthday,
@@ -17,12 +18,14 @@ export function AnimalList(props) {
   } = props;
 
   return (
-    <div className="container">
-      <AnimalPhoto photo={photo} name={name} gender={gender} />
+    <div
+      className="container"
+      style={{ color: color, backgroundColor: bubbleColor }}
+    >
+      <AnimalPhoto photo={photo} />
       <AnimalCards
-        id={id}
-        // name={name}
-        // gender={gender}
+        name={name}
+        gender={gender}
         birthday={birthday}
         hobby={hobby}
         personality={personality}

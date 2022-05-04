@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { VILLAGERS_URL } from "./constants/index";
-import "./App.css";
-
 import { AnimalList } from "./components/AnimalList";
 import { Nav } from "./components/Nav.js";
+import axios from "axios";
+
+import "./App.css";
 
 function App() {
   const [data, setData] = useState([]);
@@ -14,6 +14,7 @@ function App() {
       .get(`${VILLAGERS_URL}`)
       .then((res) => {
         setData(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -24,14 +25,14 @@ function App() {
 
   return (
     <div className="App">
-      <Nav className="Nav" />
+      <Nav />
       <div className="AnimalContainer">
         {data.map((animal) => (
           <AnimalList
-            // className="Animal"
             key={animal.id}
-            photo={animal.icon_uri}
-            id={animal.id}
+            color={animal["text-color"]}
+            bubbleColor={animal["bubble-color"]}
+            photo={animal.image_uri}
             name={animal.name["name-USen"]}
             gender={animal.gender}
             birthday={animal["birthday-string"]}

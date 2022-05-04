@@ -1,15 +1,8 @@
 import React from "react";
-import "../styles/AnimalList.css";
+import "../App.css";
 
 export function AnimalPhoto(props) {
-  let { photo, name, gender } = props;
+  let { photo, name } = props;
 
-  return (
-    <div className="AnimalPhoto">
-      <img src={photo} alt={name} />
-      <h1>
-        NAME: {name} ({gender})
-      </h1>
-    </div>
-  );
+  return <img className="AnimalPhoto" src={photo} alt={name} />;
 }
