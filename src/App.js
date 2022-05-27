@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VILLAGERS_URL } from "./constants/index";
 import { AnimalList } from "./components/AnimalList";
-import { Nav } from "./components/Nav.js";
 import axios from "axios";
 
 import "./App.css";
@@ -25,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
       <div className="AnimalContainer">
         {data.map((animal) => (
           <AnimalList
