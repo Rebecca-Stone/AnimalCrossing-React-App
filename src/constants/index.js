@@ -1,4 +1,4 @@
-export const VILLAGERS_URL = "http://acnhapi.com/v1a/villagers/";
+export const VILLAGERS_URL = "https://acnhapi.com/v1a/villagers/";
 
 // export const VILLAGERS_URL = "https://api.nookipedia.com/villagers";
 
